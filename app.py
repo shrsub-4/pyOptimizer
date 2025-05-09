@@ -18,6 +18,27 @@ SERVICE_NAME = os.getenv("SERVICE_NAME", "appservice")
 # Initialize Flask app
 app = Flask(__name__)
 
+
+def _initialize_db():
+    with sqlite3.connect("metrics.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS metrics_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                node TEXT,
+                latency REAL,
+                bandwidth REAL,
+                energy REAL,
+                timestamp TEXT
+            )
+        """
+        )
+        conn.commit()
+
+
+_initialize_db()
+
 print("Starting Optimizer...")
 collector = MetricsCore(config=config[SERVICE_NAME])
 optimizer = PlacementOptimizer(

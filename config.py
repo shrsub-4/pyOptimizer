@@ -3,11 +3,12 @@ import random
 config = {
     "autocar": {
         "version": "1.0",
-        "application_url": "http://192.168.112.23:30912/upload",
+        "application_url": "http://192.168.112.23:31413/upload",
         "nodes": ["worker-1", "worker-2", "worker-3"],
         "workloads": ["appservice", "db-service"],
-        "alpha": 0.5,
-        "beta": 0.5,
+        "alpha": 0.3,
+        "beta": 0.2,
+        "gamma": 0.5,
         "request": {
             "headers": {"Host": "appservice.shadow.example.com"},
             "data": {

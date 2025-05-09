@@ -18,5 +18,5 @@ sum(irate(istio_requests_total{{source_workload_namespace="shadow",source_worklo
 """
 
 POD_ENERGY = """
-sum(rate(container_cpu_usage_seconds_total{namespace="shadow", pod=~"appservice.*"}[1m]))
+sum(rate(container_cpu_usage_seconds_total{{namespace="shadow", pod=~"{app}.*"}}[1m]))
 """
