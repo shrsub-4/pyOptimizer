@@ -18,6 +18,7 @@ class DBManager:
                     node TEXT,
                     latency REAL,
                     bandwidth REAL,
+                    energy REAL,
                     timestamp TEXT
                 )
             """
@@ -33,13 +34,14 @@ class DBManager:
             cursor = conn.cursor()
             cursor.execute(
                 """
-                INSERT INTO metrics_log (node, latency, bandwidth, timestamp)
+                INSERT INTO metrics_log (node, latency, bandwidth, energy, timestamp)
                 VALUES (?, ?, ?, ?)
             """,
                 (
                     node,
                     metrics.get("request_duration"),
                     metrics.get("per_request_bandwidth"),
+                    metrics.get("energy_watts"),
                     datetime.utcnow().isoformat(),
                 ),
             )
