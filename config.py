@@ -3,14 +3,14 @@ import random
 config = {
     "autocar": {
         "version": "1.0",
-        "application_url": "http://192.168.112.23:31413/upload",
+        "application_url": "http://192.168.112.23:32423/upload",
         "nodes": ["worker-1", "worker-2", "worker-3"],
         "workloads": ["appservice", "db-service"],
         "alpha": 0.3,
         "beta": 0.2,
         "gamma": 0.5,
         "request": {
-            "headers": {"Host": "appservice.shadow.example.com"},
+            "headers": {"Host": "appservice.default.example.com"},
             "data": {
                 "lidar_distance": str(round(random.uniform(1.0, 3.5), 1)),
                 "radar_speed": str(round(random.uniform(4.0, 8.0), 1)),
