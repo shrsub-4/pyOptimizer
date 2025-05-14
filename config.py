@@ -3,7 +3,7 @@ import random
 config = {
     "autocar": {
         "version": "1.0",
-        "application_url": "http://192.168.112.23:32423/upload",
+        "application_url": "http://192.168.112.23:30714/upload",
         "nodes": ["worker-1", "worker-2", "worker-3"],
         "workloads": ["appservice", "db-service"],
         "alpha": 0.3,

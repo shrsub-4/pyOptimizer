@@ -24,7 +24,7 @@ sum(irate(istio_requests_total{{
   source_workload="{source}",
   destination_workload="{destination}",
   source_workload_namespace="default"
-}}[1m])) by (source_pod)
+}}[1m])) by (pod)
 """
 
 POD_ENERGY = """

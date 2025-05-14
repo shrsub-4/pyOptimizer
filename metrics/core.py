@@ -30,7 +30,7 @@ class MetricsCore:
                     flat_map[pod] = node
         return flat_map
 
-    def aggregate_metrics_by_node(self, metrics_by_pod, pod_node_map):
+    def _aggregate_metrics_by_node(self, metrics_by_pod, pod_node_map):
         node_metrics = defaultdict(
             lambda: {"latency": [], "bandwidth": [], "energy": 0}
         )
@@ -61,9 +61,18 @@ class MetricsCore:
             }
         return final
 
-    def collect_metrics(self, source_workload, destination_workload):
-        resp = self.collector.get_metrics(
+    def collect_metrics(self, placement_map):
+        source_workload = self.config["workloads"][0]
+        destination_workload = self.config["workloads"][1]
+
+        raw_metrics = self.collector.get_metrics(
             source_workload=source_workload,
             destination_workload=destination_workload,
         )
-        return resp
+        print(f"Raw metrics: {raw_metrics}")
+
+        node_aggregated_metrics = self._aggregate_metrics_by_node(
+            raw_metrics, placement_map
+        )
+        print(f"Node aggregated metrics: {node_aggregated_metrics}")
+        return node_aggregated_metrics
